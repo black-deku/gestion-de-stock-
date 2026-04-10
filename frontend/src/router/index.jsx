@@ -4,6 +4,7 @@ import Login from '../pages/Login';
 import ProtectedRoute from '../components/ProtectedRoute';
 import Layout from '../components/Layout';
 import Products from '../pages/Products';
+import Movements from '../pages/Movements';
 
 /**
  * Application router configuration.
@@ -25,6 +26,7 @@ const router = createBrowserRouter([
         children: [
           { path: '/', element: <Dashboard /> },
           { path: '/products', element: <Products /> },
+          { path: '/movements', element: <Movements /> },
         ]
       }
     ],

@@ -28,6 +28,24 @@ function Products() {
     setShowForm(true);
   };
 
+  const handleMovement = async (product, type) => {
+    const qtyStr = window.prompt(`Enter quantity to ${type === 'entry' ? 'add to' : 'remove from'} stock:`);
+    const quantity = parseInt(qtyStr, 10);
+    if (!quantity || quantity <= 0) return;
+    
+    try {
+      await api.post('/stock-movements', {
+        product_id: product.id,
+        type,
+        quantity,
+        notes: `Quick ${type} from Products page`
+      });
+      fetchProducts();
+    } catch(err) {
+      alert('Error updating stock');
+    }
+  };
+
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this product?')) {
       await api.delete(`/products/${id}`);
@@ -100,6 +118,8 @@ function Products() {
                 <td>{p.quantity}</td>
                 <td>${Number(p.price).toFixed(2)}</td>
                 <td>
+                  <button onClick={() => handleMovement(p, 'entry')} className="btn-text" style={{color: 'var(--color-success)'}}>+ Add</button>
+                  <button onClick={() => handleMovement(p, 'exit')} className="btn-text" style={{color: 'var(--color-warning)'}}>- Remove</button>
                   <button onClick={() => handleEdit(p)} className="btn-text">Edit</button>
                   <button onClick={() => handleDelete(p.id)} className="btn-text text-danger">Delete</button>
                 </td>

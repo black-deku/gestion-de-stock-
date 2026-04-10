@@ -49,4 +49,5 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
     Route::apiResource('products', \App\Http\Controllers\ProductController::class);
+    Route::apiResource('stock-movements', \App\Http\Controllers\StockMovementController::class)->only(['index', 'store']);
 });
