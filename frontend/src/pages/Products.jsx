@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import api from '../api/axios';
 import './Products.css';
 
@@ -7,6 +7,7 @@ function Products() {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [formData, setFormData] = useState({ id: null, name: '', sku: '', description: '', quantity: 0, price: 0 });
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     fetchProducts();
@@ -20,6 +21,38 @@ function Products() {
       console.error('Failed to fetch products', error);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleExport = () => {
+    api.get('/products/export/csv', { responseType: 'blob' })
+      .then(response => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'products.csv');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      })
+      .catch(() => alert('Failed to export CSV'));
+  };
+
+  const handleImport = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    const data = new FormData();
+    data.append('file', file);
+
+    try {
+      await api.post('/products/import/csv', data, {
+        headers: { 'Content-Type': 'multipart/form-data' }
+      });
+      alert('Import successful!');
+      fetchProducts();
+    } catch (error) {
+      alert('Import failed. Please check the CSV format.');
     }
   };
 
@@ -73,9 +106,24 @@ function Products() {
     <div>
       <div className="header-actions">
         <h1>📦 Products</h1>
-        <button className="btn-primary" onClick={() => { setShowForm(true); setFormData({ id: null, name: '', sku: '', description: '', quantity: 0, price: 0 }); }}>
-          + Add Product
-        </button>
+        <div style={{ display: 'flex', gap: '0.5rem' }}>
+          <button className="btn-secondary" onClick={handleExport}>
+            ⬇ Export CSV
+          </button>
+          <button className="btn-secondary" onClick={() => fileInputRef.current.click()}>
+            ⬆ Import CSV
+          </button>
+          <input 
+            type="file" 
+            accept=".csv" 
+            style={{ display: 'none' }} 
+            ref={fileInputRef}
+            onChange={handleImport}
+          />
+          <button className="btn-primary" onClick={() => { setShowForm(true); setFormData({ id: null, name: '', sku: '', description: '', quantity: 0, price: 0 }); }}>
+            + Add Product
+          </button>
+        </div>
       </div>
 
       {showForm && (

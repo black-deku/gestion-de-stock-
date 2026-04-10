@@ -50,4 +50,73 @@ class ProductController extends Controller
         $product->delete();
         return response()->json(null, 204);
     }
+
+    public function exportCsv()
+    {
+        $headers = [
+            "Content-type"        => "text/csv",
+            "Content-Disposition" => "attachment; filename=products.csv",
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0"
+        ];
+
+        $products = Product::all();
+        $columns = ['ID', 'Name', 'SKU', 'Description', 'Quantity', 'Price', 'Created At'];
+
+        $callback = function() use($products, $columns) {
+            $file = fopen('php://output', 'w');
+            fputcsv($file, $columns);
+
+            foreach ($products as $task) {
+                $row['ID']  = $task->id;
+                $row['Name']    = $task->name;
+                $row['SKU']    = $task->sku;
+                $row['Description']  = $task->description;
+                $row['Quantity']  = $task->quantity;
+                $row['Price']  = $task->price;
+                $row['Created At']  = $task->created_at;
+
+                fputcsv($file, array($row['ID'], $row['Name'], $row['SKU'], $row['Description'], $row['Quantity'], $row['Price'], $row['Created At']));
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    public function importCsv(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:csv,txt'
+        ]);
+
+        $file = $request->file('file');
+        $handle = fopen($file->getPathname(), "r");
+        
+        $header = true;
+        while ($csvLine = fgetcsv($handle, 1000, ",")) {
+            if ($header) {
+                $header = false;
+                continue;
+            }
+
+            // Expected CSV: ID, Name, SKU, Description, Quantity, Price
+            if (count($csvLine) >= 6) {
+                Product::updateOrCreate(
+                    ['sku' => $csvLine[2]],
+                    [
+                        'name' => $csvLine[1],
+                        'description' => $csvLine[3],
+                        'quantity' => (int) $csvLine[4],
+                        'price' => (float) $csvLine[5]
+                    ]
+                );
+            }
+        }
+        fclose($handle);
+
+        return response()->json(['message' => 'Products imported successfully']);
+    }
 }
