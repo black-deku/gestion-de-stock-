@@ -1,0 +1,24 @@
+# Dependencies
+/backend/vendor/
+/frontend/node_modules/
+
+# Environment files (contain secrets)
+.env
+!.env.example
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build output
+/frontend/dist/
+
+# Laravel
+/backend/storage/*.key
+/backend/.phpunit.result.cache
