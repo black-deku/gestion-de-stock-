@@ -15,6 +15,7 @@ function Layout() {
           <Link to="/">Dashboard</Link>
           <Link to="/products">Products</Link>
           <Link to="/movements">Movements</Link>
+          <Link to="/documents">Documents</Link>
         </nav>
         <div className="sidebar-footer">
           <p>{user?.name}</p>

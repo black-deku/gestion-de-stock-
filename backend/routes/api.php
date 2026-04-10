@@ -50,4 +50,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('products', \App\Http\Controllers\ProductController::class);
     Route::apiResource('stock-movements', \App\Http\Controllers\StockMovementController::class)->only(['index', 'store']);
+    Route::apiResource('documents', \App\Http\Controllers\DocumentController::class)->except(['update', 'store']);
+    Route::post('documents', [\App\Http\Controllers\DocumentController::class, 'store']); // Requires post for file uploads
 });
