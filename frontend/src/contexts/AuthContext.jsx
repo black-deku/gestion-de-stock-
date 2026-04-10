@@ -26,8 +26,8 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   const login = async (email, password) => {
-    // CSRF cookie requirement for Sanctum
-    await api.get('/sanctum/csrf-cookie', { baseURL: import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:8000' });
+    // CSRF cookie requirement for Sanctum (Proxied via Vite)
+    await api.get('/sanctum/csrf-cookie', { baseURL: '/' });
     
     const response = await api.post('/login', { email, password });
     setUser(response.data.user);
