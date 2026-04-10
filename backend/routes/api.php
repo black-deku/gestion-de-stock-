@@ -7,6 +7,7 @@
  * Authentication routes will be added in Step 2.
  */
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+Route::post('/login', [AuthController::class, 'login']);
+
 /**
  * Health check endpoint.
+
  * Returns API status and current Laravel version.
  */
 Route::get('/health', function () {
@@ -41,4 +45,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::apiResource('products', \App\Http\Controllers\ProductController::class);
 });

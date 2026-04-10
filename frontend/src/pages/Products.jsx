@@ -1,0 +1,118 @@
+import { useState, useEffect } from 'react';
+import api from '../api/axios';
+import './Products.css';
+
+function Products() {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({ id: null, name: '', sku: '', description: '', quantity: 0, price: 0 });
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      const { data } = await api.get('/products');
+      setProducts(data);
+    } catch (error) {
+      console.error('Failed to fetch products', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleEdit = (product) => {
+    setFormData(product);
+    setShowForm(true);
+  };
+
+  const handleDelete = async (id) => {
+    if (window.confirm('Are you sure you want to delete this product?')) {
+      await api.delete(`/products/${id}`);
+      fetchProducts();
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (formData.id) {
+        await api.put(`/products/${formData.id}`, formData);
+      } else {
+        await api.post('/products', formData);
+      }
+      setShowForm(false);
+      setFormData({ id: null, name: '', sku: '', description: '', quantity: 0, price: 0 });
+      fetchProducts();
+    } catch (error) {
+      console.error('Error saving product', error);
+    }
+  };
+
+  return (
+    <div>
+      <div className="header-actions">
+        <h1>📦 Products</h1>
+        <button className="btn-primary" onClick={() => { setShowForm(true); setFormData({ id: null, name: '', sku: '', description: '', quantity: 0, price: 0 }); }}>
+          + Add Product
+        </button>
+      </div>
+
+      {showForm && (
+        <div className="form-card">
+          <h3>{formData.id ? 'Edit Product' : 'New Product'}</h3>
+          <form onSubmit={handleSubmit}>
+            <div className="form-grid">
+              <input required placeholder="Name" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} />
+              <input required placeholder="SKU" value={formData.sku} onChange={e => setFormData({...formData, sku: e.target.value})} />
+              <input type="number" required placeholder="Quantity" value={formData.quantity} onChange={e => setFormData({...formData, quantity: e.target.value})} />
+              <input type="number" step="0.01" required placeholder="Price" value={formData.price} onChange={e => setFormData({...formData, price: e.target.value})} />
+              <textarea placeholder="Description" value={formData.description || ''} onChange={e => setFormData({...formData, description: e.target.value})} className="full-width" />
+            </div>
+            <div className="form-actions">
+              <button type="button" className="btn-secondary" onClick={() => setShowForm(false)}>Cancel</button>
+              <button type="submit" className="btn-primary">Save Product</button>
+            </div>
+          </form>
+        </div>
+      )}
+
+      {loading ? (
+        <p>Loading...</p>
+      ) : (
+        <table className="data-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>SKU</th>
+              <th>Quantity</th>
+              <th>Price</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {products.map(p => (
+              <tr key={p.id}>
+                <td>{p.name}</td>
+                <td>{p.sku}</td>
+                <td>{p.quantity}</td>
+                <td>${Number(p.price).toFixed(2)}</td>
+                <td>
+                  <button onClick={() => handleEdit(p)} className="btn-text">Edit</button>
+                  <button onClick={() => handleDelete(p.id)} className="btn-text text-danger">Delete</button>
+                </td>
+              </tr>
+            ))}
+            {products.length === 0 && (
+              <tr><td colSpan="5" className="text-center">No products found.</td></tr>
+            )}
+          </tbody>
+        </table>
+      )}
+    </div>
+  );
+}
+
+export default Products;

@@ -1,14 +1,10 @@
-/**
- * Dashboard page placeholder.
- * Will be replaced with actual dashboard content in later steps.
- */
 function Dashboard() {
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>📊 Dashboard</h1>
+    <div>
+      <h1 style={{ marginBottom: '1rem', color: 'var(--color-primary)' }}>📊 Dashboard Overview</h1>
       <p>Welcome to the Stock Management System.</p>
-      <p style={{ color: '#666', marginTop: '1rem' }}>
-        This page will display stock alerts, charts, and key metrics.
+      <p style={{ color: 'var(--color-text-muted)', marginTop: '1rem' }}>
+        This area will display widgets, stock alerts, charts, and key metrics.
       </p>
     </div>
   );

@@ -1,7 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import Login from '../pages/Login';
-import NotFound from '../pages/NotFound';
+import ProtectedRoute from '../components/ProtectedRoute';
+import Layout from '../components/Layout';
+import Products from '../pages/Products';
 
 /**
  * Application router configuration.
@@ -16,7 +18,16 @@ import NotFound from '../pages/NotFound';
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Dashboard />,
+    element: <ProtectedRoute />,
+    children: [
+      {
+        element: <Layout />,
+        children: [
+          { path: '/', element: <Dashboard /> },
+          { path: '/products', element: <Products /> },
+        ]
+      }
+    ],
   },
   {
     path: '/login',
