@@ -14,9 +14,28 @@ function Dashboard() {
 
   if (!stats) return <p>Loading dashboard...</p>;
 
+  const handleDownloadReport = () => {
+    api.get('/reports/stock/pdf', { responseType: 'blob' })
+      .then(response => {
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'stock_report.pdf');
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+      })
+      .catch(() => alert('Failed to download report'));
+  };
+
   return (
     <div>
-      <h1 style={{ marginBottom: '1.5rem', color: 'var(--color-primary)' }}>📊 Dashboard Overview</h1>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem' }}>
+        <h1 style={{ color: 'var(--color-primary)', margin: 0 }}>📊 Dashboard Overview</h1>
+        <button className="btn-primary" onClick={handleDownloadReport}>
+          📄 Download Full PDF Report
+        </button>
+      </div>
       
       <div className="dashboard-grid">
         <div className="stat-card">

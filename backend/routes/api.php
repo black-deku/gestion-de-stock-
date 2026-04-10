@@ -56,4 +56,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('documents', [\App\Http\Controllers\DocumentController::class, 'store']); // Requires post for file uploads
 
     Route::get('/dashboard/stats', [\App\Http\Controllers\DashboardController::class, 'stats']);
+    
+    Route::get('/reports/stock/pdf', [\App\Http\Controllers\ReportController::class, 'generateStockReport']);
 });
