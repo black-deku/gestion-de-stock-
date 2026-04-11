@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import api from '../api/axios';
+import { formatMAD } from '../utils/format';
 import './Products.css';
 
 function Products() {
@@ -164,7 +165,7 @@ function Products() {
                 <td>{p.name}</td>
                 <td>{p.sku}</td>
                 <td>{p.quantity}</td>
-                <td>${Number(p.price).toFixed(2)}</td>
+                <td>{formatMAD(p.price)}</td>
                 <td>
                   <button onClick={() => handleMovement(p, 'entry')} className="btn-text" style={{color: 'var(--color-success)'}}>+ Add</button>
                   <button onClick={() => handleMovement(p, 'exit')} className="btn-text" style={{color: 'var(--color-warning)'}}>- Remove</button>

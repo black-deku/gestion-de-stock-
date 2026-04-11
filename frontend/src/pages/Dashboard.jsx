@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import api from '../api/axios';
+import { formatMAD } from '../utils/format';
 import './Dashboard.css';
 
 function Dashboard() {
@@ -44,7 +45,7 @@ function Dashboard() {
         </div>
         <div className="stat-card">
           <h3>Total Stock Value</h3>
-          <p>${Number(stats.total_value).toFixed(2)}</p>
+          <p>{formatMAD(stats.total_value)}</p>
         </div>
         <div className="stat-card">
           <h3>Low Stock Items</h3>

@@ -24,7 +24,7 @@
 
     <div class="summary">
         <p><strong>Total Unique Products:</strong> {{ $totalProducts }}</p>
-        <p><strong>Total Estimated Stock Value:</strong> ${{ number_format($totalValue, 2) }}</p>
+        <p><strong>Total Estimated Stock Value:</strong> {{ number_format($totalValue, 2, ',', ' ') }} DH</p>
     </div>
 
     <table>
@@ -42,11 +42,11 @@
             <tr>
                 <td>{{ $product->sku }}</td>
                 <td>{{ $product->name }}</td>
-                <td>${{ number_format($product->price, 2) }}</td>
+                <td>{{ number_format($product->price, 2, ',', ' ') }} DH</td>
                 <td class="{{ $product->quantity < 10 ? 'low-stock' : '' }}">
                     {{ $product->quantity }}
                 </td>
-                <td>${{ number_format($product->price * $product->quantity, 2) }}</td>
+                <td>{{ number_format($product->price * $product->quantity, 2, ',', ' ') }} DH</td>
             </tr>
             @endforeach
         </tbody>
