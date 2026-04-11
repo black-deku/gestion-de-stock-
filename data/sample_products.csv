@@ -1,0 +1,41 @@
+ID,Name,SKU,Description,Quantity,Price,Created At
+1,Ciment CPJ 35 - Sac 50kg,CIM-CPJ35-50,Ciment Portland composé CPJ 35 en sac de 50 kg pour construction générale,320,72.00,2026-01-15 09:00:00
+2,Ciment CPJ 45 - Sac 50kg,CIM-CPJ45-50,Ciment Portland composé CPJ 45 haute résistance en sac de 50 kg,185,85.00,2026-01-15 09:05:00
+3,Fer à béton HA 10mm - Barre 12m,FER-HA10-12,Barre d'acier à haute adhérence diamètre 10 mm longueur 12 mètres,540,48.50,2026-01-16 10:30:00
+4,Fer à béton HA 12mm - Barre 12m,FER-HA12-12,Barre d'acier à haute adhérence diamètre 12 mm longueur 12 mètres,410,62.00,2026-01-16 10:35:00
+5,Fer à béton HA 16mm - Barre 12m,FER-HA16-12,Barre d'acier à haute adhérence diamètre 16 mm longueur 12 mètres,280,98.00,2026-01-16 10:40:00
+6,Sable de mer - Tonne,SAB-MER-T,Sable de mer lavé et calibré vendu à la tonne,95,180.00,2026-01-20 08:00:00
+7,Gravier concassé 15/25 - Tonne,GRV-1525-T,Gravier concassé granulométrie 15/25 mm vendu à la tonne,78,220.00,2026-01-20 08:10:00
+8,Brique rouge 12 trous,BRQ-RG12,Brique rouge creuse 12 trous dimensions 20x20x30 cm,4200,3.20,2026-01-22 14:00:00
+9,Brique rouge 8 trous,BRQ-RG08,Brique rouge creuse 8 trous dimensions 15x20x30 cm,3800,2.50,2026-01-22 14:05:00
+10,Parpaing creux 20x20x50,PRP-2050,Bloc de béton creux standard 20x20x50 cm,2600,5.80,2026-01-22 14:10:00
+11,Plâtre en sac 25kg,PLT-SAC25,Plâtre de construction pour enduits intérieurs sac de 25 kg,150,45.00,2026-02-01 09:00:00
+12,Carrelage sol 40x40 Beige,CRL-S4040B,Carrelage de sol céramique 40x40 cm coloris beige boîte de 1m²,340,85.00,2026-02-03 11:00:00
+13,Carrelage sol 60x60 Gris,CRL-S6060G,Carrelage de sol grès cérame 60x60 cm coloris gris boîte de 1.44m²,220,145.00,2026-02-03 11:05:00
+14,Carrelage mural 25x40 Blanc,CRL-M2540W,Carrelage de revêtement mural 25x40 cm blanc brillant boîte de 1m²,480,62.00,2026-02-03 11:10:00
+15,Peinture vinylique blanche 15L,PNT-VIN-15W,Peinture vinylique intérieure blanche mate seau de 15 litres,90,285.00,2026-02-10 08:30:00
+16,Peinture acrylique extérieure 10L,PNT-ACR-10,Peinture acrylique façade coloris sable seau de 10 litres,65,350.00,2026-02-10 08:35:00
+17,Tube PVC évacuation 100mm - 4m,TUB-PVC100,Tube PVC rigide pour évacuation diamètre 100 mm longueur 4 mètres,175,78.00,2026-02-15 10:00:00
+18,Tube PVC évacuation 50mm - 4m,TUB-PVC050,Tube PVC rigide pour évacuation diamètre 50 mm longueur 4 mètres,230,42.00,2026-02-15 10:05:00
+19,Tube PPR eau chaude 20mm - 4m,TUB-PPR020,Tube polypropylène pour eau chaude diamètre 20 mm longueur 4 mètres,310,35.00,2026-02-15 10:10:00
+20,Robinet mitigeur cuisine chromé,ROB-CUI-CR,Robinet mitigeur mono-commande pour évier de cuisine finition chromée,28,320.00,2026-02-20 09:00:00
+21,Robinet mitigeur lavabo,ROB-LAV-CR,Robinet mitigeur pour lavabo de salle de bain finition chromée,35,195.00,2026-02-20 09:05:00
+22,Câble électrique 2.5mm² - 100m,CAB-EL25-100,Câble électrique rigide en cuivre section 2.5 mm² bobine de 100 mètres,55,480.00,2026-03-01 08:00:00
+23,Câble électrique 1.5mm² - 100m,CAB-EL15-100,Câble électrique rigide en cuivre section 1.5 mm² bobine de 100 mètres,70,320.00,2026-03-01 08:05:00
+24,Disjoncteur 20A monophasé,DIS-20A-1P,Disjoncteur modulaire 20 ampères monophasé courbe C,120,45.00,2026-03-01 08:10:00
+25,Interrupteur simple blanc,INT-SMP-BL,Interrupteur va-et-vient simple encastrable coloris blanc,250,18.00,2026-03-05 10:00:00
+26,Prise de courant 2P+T 16A,PRS-2PT-16,Prise de courant encastrable 2 pôles + terre 16A coloris blanc,300,22.00,2026-03-05 10:05:00
+27,Étanchéité bitumineuse rouleau 10m²,ETN-BIT-10,Membrane d'étanchéité bitumineuse auto-adhésive rouleau de 10 m²,42,350.00,2026-03-10 09:00:00
+28,Joint silicone transparent 280ml,JNT-SIL-TR,Mastic silicone transparent multi-usage cartouche de 280 ml,160,32.00,2026-03-10 09:05:00
+29,Colle carrelage sac 25kg,COL-CRL-25,Colle à carrelage pour pose sol et mur intérieur sac de 25 kg,200,55.00,2026-03-12 14:00:00
+30,Joint carrelage blanc 5kg,JNT-CRL-BL,Joint de carrelage cimentaire fin coloris blanc sac de 5 kg,180,38.00,2026-03-12 14:05:00
+31,Porte intérieure bois 80x210,PRT-INT-80,Porte intérieure en bois okoumé pré-peinte 80x210 cm,8,750.00,2026-03-18 08:30:00
+32,Porte intérieure bois 70x210,PRT-INT-70,Porte intérieure en bois okoumé pré-peinte 70x210 cm,6,680.00,2026-03-18 08:35:00
+33,Fenêtre aluminium coulissante 120x120,FEN-ALU-120,Fenêtre en aluminium coulissante double vitrage 120x120 cm,12,1450.00,2026-03-20 10:00:00
+34,Serrure porte d'entrée 3 points,SER-PE-3PT,Serrure multipoints de sécurité pour porte d'entrée 3 points,18,520.00,2026-03-22 09:00:00
+35,Charnière inox porte intérieure,CHR-INX-PI,Charnière en acier inoxydable pour porte intérieure lot de 2,85,28.00,2026-03-22 09:05:00
+36,Cuvette WC céramique blanche,WC-CUV-BL,Cuvette de toilettes en céramique vitrifiée coloris blanc avec abattant,15,650.00,2026-04-01 08:00:00
+37,Lavabo céramique 60cm,LAV-CER-60,Lavabo vasque en céramique 60 cm avec trop-plein coloris blanc,20,380.00,2026-04-01 08:05:00
+38,Receveur de douche 80x80 acrylique,REC-DCH-80,Receveur de douche extra-plat 80x80 cm en acrylique blanc,7,890.00,2026-04-01 08:10:00
+39,Chauffe-eau électrique 50L,CHF-EAU-50,Chauffe-eau électrique vertical mural capacité 50 litres,5,1250.00,2026-04-05 09:00:00
+40,Échelle aluminium 3m,ECH-ALU-3M,Échelle aluminium simple 3 mètres 10 barreaux charge max 150 kg,14,450.00,2026-04-05 09:10:00
