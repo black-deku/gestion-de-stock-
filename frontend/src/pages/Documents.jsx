@@ -40,7 +40,7 @@ function Documents() {
       fileInputRef.current.value = null;
       fetchDocuments();
     } catch (error) {
-      alert('Upload failed: ' + (error.response?.data?.message || 'Check max file size (10MB) and format (PDF)'));
+      alert('Échec de l\'upload : ' + (error.response?.data?.message || 'Vérifiez la taille max (10 Mo) et le format (PDF)'));
     } finally {
       setUploading(false);
     }
@@ -57,11 +57,11 @@ function Documents() {
         link.click();
         link.remove();
       })
-      .catch(() => alert('Failed to download file'));
+      .catch(() => alert('Échec du téléchargement'));
   };
 
   const handleDelete = async (id) => {
-    if(window.confirm('Delete this document?')) {
+    if (window.confirm('Supprimer ce document ?')) {
       await api.delete(`/documents/${id}`);
       fetchDocuments();
     }
@@ -69,38 +69,50 @@ function Documents() {
 
   return (
     <div>
-      <h1 style={{ marginBottom: '1rem', color: 'var(--color-primary)' }}>📄 Documents (PDFs)</h1>
-      
+      <div className="page-header">
+        <h1 className="page-title">Documents</h1>
+      </div>
+
       <div className="form-card">
-        <h3>Upload PDF</h3>
-        <form onSubmit={handleUpload} style={{ display: 'flex', gap: '1rem', marginTop: '1rem' }}>
-          <input 
-            type="text" 
-            placeholder="Document Name" 
-            required 
-            value={docName} 
-            onChange={(e) => setDocName(e.target.value)} 
-            style={{ padding: '0.5rem', flex: 1, borderRadius: '4px', border: '1px solid var(--color-border)' }}
-          />
-          <input 
-            type="file" 
-            accept="application/pdf" 
-            required 
-            ref={fileInputRef} 
-            style={{ padding: '0.5rem' }}
+        <h3>Téléverser un PDF</h3>
+        <form onSubmit={handleUpload} style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end' }}>
+          <div style={{ flex: 1 }}>
+            <input
+              type="text"
+              placeholder="Nom du document"
+              required
+              value={docName}
+              onChange={(e) => setDocName(e.target.value)}
+              style={{
+                width: '100%',
+                padding: '0.5rem 0.75rem',
+                border: '1px solid var(--color-border)',
+                borderRadius: 'var(--radius-md)',
+                fontSize: 'var(--font-size-sm)',
+                fontFamily: 'inherit',
+                outline: 'none',
+              }}
+            />
+          </div>
+          <input
+            type="file"
+            accept="application/pdf"
+            required
+            ref={fileInputRef}
+            style={{ fontSize: 'var(--font-size-sm)' }}
           />
           <button type="submit" className="btn-primary" disabled={uploading}>
-            {uploading ? 'Uploading...' : 'Upload'}
+            {uploading ? 'Upload...' : 'Téléverser'}
           </button>
         </form>
       </div>
 
-      {loading ? <p>Loading...</p> : (
+      {loading ? <p style={{ color: '#94a3b8' }}>Chargement...</p> : (
         <table className="data-table">
           <thead>
             <tr>
-              <th>Name</th>
-              <th>Uploaded By</th>
+              <th>Nom</th>
+              <th>Ajouté par</th>
               <th>Date</th>
               <th>Actions</th>
             </tr>
@@ -110,15 +122,17 @@ function Documents() {
               <tr key={doc.id}>
                 <td>{doc.name}</td>
                 <td>{doc.user?.name}</td>
-                <td>{new Date(doc.created_at).toLocaleDateString()}</td>
+                <td>{new Date(doc.created_at).toLocaleDateString('fr-FR')}</td>
                 <td>
-                  <button onClick={() => downloadFile(doc.id, doc.name)} className="btn-text" style={{color: 'var(--color-primary)'}}>Download</button>
-                  <button onClick={() => handleDelete(doc.id)} className="btn-text text-danger">Delete</button>
+                  <div className="table-actions">
+                    <button onClick={() => downloadFile(doc.id, doc.name)} className="btn-ghost text-primary">Télécharger</button>
+                    <button onClick={() => handleDelete(doc.id)} className="btn-ghost text-danger">Supprimer</button>
+                  </div>
                 </td>
               </tr>
             ))}
             {documents.length === 0 && (
-              <tr><td colSpan="4" className="text-center">No documents uploaded yet.</td></tr>
+              <tr><td colSpan="4" className="text-center" style={{ padding: '2rem', color: '#94a3b8' }}>Aucun document téléversé.</td></tr>
             )}
           </tbody>
         </table>

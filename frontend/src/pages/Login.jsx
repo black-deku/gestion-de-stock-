@@ -8,7 +8,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   const { login } = useAuth();
   const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ function Login() {
       await login(email, password);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Invalid login credentials');
+      setError(err.response?.data?.message || 'Identifiants incorrects');
     } finally {
       setLoading(false);
     }
@@ -31,15 +31,15 @@ function Login() {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1>Stock System</h1>
-          <p>Please sign in to your account</p>
+          <h1>StockPro</h1>
+          <p>Connectez-vous à votre espace</p>
         </div>
-        
+
         {error && <div className="login-error">{error}</div>}
 
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="email">Email Address</label>
+            <label htmlFor="email">Adresse e-mail</label>
             <input
               id="email"
               type="email"
@@ -49,9 +49,9 @@ function Login() {
               required
             />
           </div>
-          
+
           <div className="form-group">
-            <label htmlFor="password">Password</label>
+            <label htmlFor="password">Mot de passe</label>
             <input
               id="password"
               type="password"
@@ -61,9 +61,9 @@ function Login() {
               required
             />
           </div>
-          
+
           <button type="submit" disabled={loading} className="login-button">
-            {loading ? 'Signing in...' : 'Sign In'}
+            {loading ? 'Connexion...' : 'Se connecter'}
           </button>
         </form>
       </div>
