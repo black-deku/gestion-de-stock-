@@ -7,6 +7,7 @@
  * Authentication routes will be added in Step 2.
  */
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,8 +17,11 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 */
 
+Route::post('/login', [AuthController::class, 'login']);
+
 /**
  * Health check endpoint.
+
  * Returns API status and current Laravel version.
  */
 Route::get('/health', function () {
@@ -41,4 +45,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
     });
+
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+    Route::get('/products/export/csv', [\App\Http\Controllers\ProductController::class, 'exportCsv']);
+    Route::post('/products/import/csv', [\App\Http\Controllers\ProductController::class, 'importCsv']);
+    Route::apiResource('products', \App\Http\Controllers\ProductController::class);
+    Route::apiResource('stock-movements', \App\Http\Controllers\StockMovementController::class)->only(['index', 'store']);
+    Route::apiResource('documents', \App\Http\Controllers\DocumentController::class)->except(['update', 'store']);
+    Route::post('documents', [\App\Http\Controllers\DocumentController::class, 'store']); // Requires post for file uploads
+
+    Route::get('/dashboard/stats', [\App\Http\Controllers\DashboardController::class, 'stats']);
+    
+    Route::get('/reports/stock/pdf', [\App\Http\Controllers\ReportController::class, 'generateStockReport']);
 });

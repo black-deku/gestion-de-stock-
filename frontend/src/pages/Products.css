@@ -1,0 +1,20 @@
+/* ── Products Page ── */
+
+.header-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.header-actions h1 {
+  font-size: var(--font-size-xl);
+  font-weight: 700;
+}
+
+/* ── Table Action Buttons ── */
+.table-actions {
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
