@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+  background: linear-gradient(135deg, #0b1a14 0%, #2d5c49 50%, #0b1a14 100%);
   padding: var(--spacing-lg);
 }
 
@@ -21,12 +21,12 @@
   margin-bottom: var(--spacing-2xl);
 }
 
-.login-header h1 {
-  color: var(--color-text);
-  margin-bottom: var(--spacing-xs);
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  letter-spacing: -0.02em;
+.login-logo {
+  width: 100px;
+  height: auto;
+  margin: 0 auto var(--spacing-md);
+  display: block;
+  object-fit: contain;
 }
 
 .login-header p {

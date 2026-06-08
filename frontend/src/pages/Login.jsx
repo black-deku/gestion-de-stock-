@@ -31,7 +31,7 @@ function Login() {
     <div className="login-container">
       <div className="login-card">
         <div className="login-header">
-          <h1>StockPro</h1>
+          <img src="/ofppt-logo.png" alt="OFPPT" className="login-logo" />
           <p>Connectez-vous à votre espace</p>
         </div>
 
